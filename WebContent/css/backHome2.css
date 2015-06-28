@@ -1,0 +1,52 @@
+#content_header {
+	margin-left: 10px;
+	margin-top: 20px;
+	border: 2px solid #e6e6e6;
+	height: 400px;
+	background-color: #fff;
+}
+
+#announcement_wrapper {
+	margin-top: 10px;
+	margin-left: 10px;
+	border: 2px solid #e6e6e6;
+	height: 350px;
+	background-color: #fff;
+}
+
+#announcement_title {
+	margin-top: 10px;
+	text-align: center;
+	font: bold 26px Tahoma, Arial, Verdana;
+	color: #0297EC;
+}
+
+#announcement_table {
+	border: 1px solid #CCCCFF;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+#announcement_table a:hover, #announcement_table a:active, #paging_table a:hover,
+	#paging_table a:active {
+	color: #F29327;
+	text-decoration: none;
+}
+
+#table_title {
+	border: 1px solid #CCCCFF;
+	font: bold 22px Tahoma, Arial, Verdana;
+}
+
+#table_content {
+	border: 1px solid #CCCCFF;
+	font: normal 20px Tahoma, Arial, Verdana;
+}
+
+#paging_btn {
+	font: bold 16px Tahoma, Arial, Verdana;
+}
+
+#paging_btn:hover, #paging_btn:active {
+	background-color: #F29327;
+}

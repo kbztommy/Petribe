@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.storePhoto.model.StorePhotoVO" table="StorePhoto" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">StorePhoto_sq</param>
+            </generator>              
+        </id>
+                
+        <property name="format" column="format" />
+        <property name="photoFile" column="photoFile" />
+        <property name="updateDate" column="updateDate" />
+               
+         <many-to-one name="storeVO" class="za101g2.store.model.StoreVO" lazy="false">
+        	<column name="storeId"/>
+        </many-to-one>
+        
+        <many-to-one name="onServiceVO" class="za101g2.onService.model.OnServiceVO" lazy="false">
+        	<column name="onServiceId"/>
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

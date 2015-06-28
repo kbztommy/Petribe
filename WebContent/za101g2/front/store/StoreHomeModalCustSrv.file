@@ -1,0 +1,47 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+      <!-- ***************************Modal(自訂服務)******************************** -->
+    <div class="modal fade" id="addCustSrvModal" tabindex="-1" role="dialog" aria-labelledby="addCustSrvModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addCustSrvModalLabel">新增自訂服務</h4>
+                </div>
+                <form id="addCustSrvForm" action="<%= request.getContextPath()%>/ServiceListServlet"> 
+                <div class="modal-body">
+                		<div class="errorMsgSpan" role="alert"></div>                  
+                        <div class="form-group">
+                        	<input type="hidden" name="action" value="addCustSrvForm">
+                        	<font color="red">*</font><input type="text" name="name" placeholder="服務名稱(必填)">
+                        	<font color="red">*</font><input type="text" name="price" placeholder="價錢(必填)">
+                        	<select name="petType">
+                        		<% if(storeVO.getSpeciesLimit() == 1 ||storeVO.getSpeciesLimit()==3){
+                        		%>
+                        		<option value="dog">狗</option>
+                        		<%}%>
+                        		<% if(storeVO.getSpeciesLimit() == 2 ||storeVO.getSpeciesLimit()==3){
+                        		%>
+                        		<option value="cat">貓</option>
+                        		<%}%>
+                        	</select>
+                        	 
+                        	<input type="hidden" name="chargeType" value="perTime">                        
+                        	
+                        	<select name="isOnsale">
+                        		<option value="y">上架</option>
+                        		<option value="n">下架</option>
+                        	</select>
+                        	
+                        	<textarea class="form-control" rows="5" name="info" placeholder="詳細資訊"></textarea>                       
+                        </div>                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="addCustBt">儲存</button>            
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ***********************end Modal(自訂服務)******************************** -->

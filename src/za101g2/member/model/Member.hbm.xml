@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.member.model.MemberVO" table="Member" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">Member_sq</param>
+            </generator>  
+        </id>
+                
+        <property name="email" column="email" />
+        <property name="password" column="password" />
+        <property name="icon" column="icon" />
+        <property name="nickname" column="nickname" />
+        <property name="phone" column="phone" />
+        <property name="lastname" column="lastname" />
+        <property name="firstname" column="firstname" />
+        <property name="sex" column="sex" />
+        <property name="registerDate" column="registerDate" insert="false"/>
+        <property name="status" column="status" insert="false"/>
+       
+      
+      	<set name="orderBoards" table="OrderBoard" lazy="false" cascade="delete-orphan" inverse="true" order-by="id asc">
+	      	<key><column name="memId"/></key>
+	      	<one-to-many class="za101g2.orderBoard.model.OrderBoardVO"/>
+      	</set>	      	
+      	
+      	<set name="storeBoards" table="StoreBoard" lazy="false" cascade="all" inverse="true" order-by="id asc">
+	      	<key><column name="memId"/></key>
+	      	<one-to-many class="za101g2.storeBoard.model.StoreBoardVO"/>
+      	</set>
+      	
+      	<set name="stores" table="Store" lazy="false" cascade="all" inverse="true" order-by="id asc">
+	      	<key><column name="memId"/></key>
+	      	<one-to-many class="za101g2.store.model.StoreVO"/>
+      	</set>
+      	
+      	<set name="storeBoardReports" table="StoreBoardReport" lazy="false" cascade="all" inverse="true" order-by="id asc">
+	      	<key><column name="memId"/></key>
+	      	<one-to-many class="za101g2.storeBoardReport.model.StoreBoardReportVO"/>
+      	</set>
+      	
+     	<set name="pets" table="pet" lazy="false" cascade="all"  inverse="true"  order-by="id asc">			
+			<key>
+				<column name="memId" />
+			</key>
+			<one-to-many class="za101g2.pet.model.PetVO" />
+		</set>
+        
+        <set name="replies" table="missingReply" lazy="false" cascade="all"  inverse="true"  order-by="id asc">			
+			<key>
+				<column name="memId" />
+			</key>
+			<one-to-many class="za101g2.missingreply.model.MissingReplyVO" />
+		</set>
+		
+		<set name="reports" table="missingReport" lazy="false" cascade="all" inverse="true" order-by="id asc">			
+			<key>
+				<column name="memId" />
+			</key>
+			<one-to-many class="za101g2.missingreport.model.MissingReportVO"/>
+		</set> 	
+      	
+   
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.store.model.StoreVO" table="Store" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">Store_sq</param>
+            </generator>  
+        </id>
+                
+        <property name="name" column="name" />
+        <property name="address" column="address" />        
+        <property name="info" column="info" />
+        <property name="speciesLimit" column="speciesLimit" />
+        <property name="applyDate" column="applyDate" insert="false" update="false"/>
+        <property name="comments" column="comments" />
+        <property name="status" column="status" insert="false"/>
+        <property name="siteReport" column="siteReport" />
+        <property name="reportDate" column="reportDate" insert="false" />
+        <property name="maxQuantitly" column="maxQuantitly" />
+        <property name="icon" column="icon" />
+      
+      	<set name="orderBoards" table="OrderBoard" lazy="false" cascade="delete-orphan" inverse="true" order-by="id asc">
+	      	<key><column name="storeId"/></key>
+	      	<one-to-many class="za101g2.orderBoard.model.OrderBoardVO"/>
+      	</set>
+      	<set name="serviceLists" table="ServiceList" lazy="false" cascade="all" inverse="true" order-by="id asc">
+      		<key><column name="storeId"/></key>
+      		<one-to-many class="za101g2.serviceList.model.ServiceListVO"/>
+      	</set> 
+      	<set name="storePhotos" table="StorePhoto" lazy="false" cascade="all" inverse="true" order-by="id asc">
+      		<key><column name="storeId"/></key>
+      		<one-to-many class="za101g2.storePhoto.model.StorePhotoVO"/>
+      	</set> 
+      	<set name="storeCalendars" table="StoreCalendar" lazy="true" cascade="all" inverse="true" order-by="id asc">
+	      	<key><column name="id"/></key>
+	      	<one-to-many class="za101g2.storeCalendar.model.StoreCalendarVO"/>
+      	</set>
+      	<set name="storeBoards" table="StoreBoard" lazy="false" cascade="all" inverse="true" order-by="id desc">
+	      	<key><column name="storeId"/></key>
+	      	<one-to-many class="za101g2.storeBoard.model.StoreBoardVO"/>
+      	</set>
+   		
+   		<many-to-one name ="memberVO" class="za101g2.member.model.MemberVO" lazy="false">
+   			<column name ="memId" />
+   		</many-to-one>
+   		
+    </class>
+</hibernate-mapping>

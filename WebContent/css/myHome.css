@@ -1,0 +1,81 @@
+.member {
+	height: 300px;
+}
+.memberIcon{
+	height: 200px;
+}
+.petTitle {
+	text-align: center;
+	color: #F29327;
+	border: 2px solid #0297EC;
+	height: 40px;
+	font: bold 20px Tahoma, Arial, Verdana;
+	padding: 5px;
+}
+
+.petList {
+	display: -webkit-flex; /* Safari */
+	-webkit-justify-content: space-around; /* Safari 6.1+ */
+	display: flex;
+	justify-content: space-around;
+	border: 2px solid #0297EC;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 230px;
+}
+
+.photoAlbum {
+	height: 300px;
+}
+
+.albumTitle {
+	padding: 5px;
+	height: 40px;
+	text-align: center;
+	font: bold 20px Tahoma, Arial, Verdana;
+	border: 2px dotted #F29327;
+}
+
+.albumPhotoFrame {
+	padding: 10px;
+	height: 200px;
+	text-align: center;
+}
+
+.albumPhoto {
+	opacity: 0.7;
+}
+.albumPhotoFrame{
+	padding:0px;
+}
+.albumPhotoFrame:hover .albumPhoto, .albumPhotoFrame:active .albumPhoto
+	{
+	opacity: 1;
+}
+
+.journalPhotoFrame {
+	text-align: center;
+}
+
+.journalPhoto {
+	height: 300px;
+}
+
+.journalTitle {
+	font: bold 20px Tahoma, Arial, Verdana;
+	text-align: center;
+	padding: 5px;
+	height: 20px;
+}
+
+.article {
+	font: bold 18px Tahoma, Arial, Verdana;
+	margin: 15px;
+	height: 215px;
+	overflow: hidden;
+}
+
+.articleInfo {
+	margin: 15px;
+	height: 20px;
+}

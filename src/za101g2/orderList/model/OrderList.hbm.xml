@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.orderList.model.OrderListVO" table="OrderList" >
+        
+        <composite-id>
+        	<key-many-to-one  name="orderBoardVO" class="za101g2.orderBoard.model.OrderBoardVO" lazy="false">
+        		<column name="orderId"></column>
+        	</key-many-to-one>
+        	<key-many-to-one  name="serviceListVO" class="za101g2.serviceList.model.ServiceListVO" lazy="false">
+        		<column name="serviceId"></column>
+        	</key-many-to-one>        	
+        	<key-property name="petName" column="petName"/>
+        	<key-property name="serviceDate" column="serviceDate"/>
+        </composite-id>
+                
+        <property name="discount" column="discount" />
+        <property name="quantitly" column="quantitly" />       
+        <property name="isReport" column="isReport" />
+       
+        
+    </class>
+</hibernate-mapping>

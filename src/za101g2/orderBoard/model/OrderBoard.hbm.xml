@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.orderBoard.model.OrderBoardVO" table="OrderBoard" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">OrderBoard_sq</param>
+            </generator>  
+        </id>
+                
+        <property name="orderDate" column="orderDate" />
+        <property name="startDate" column="startDate" />
+        <property name="endDate" column="endDate" />
+        <property name="total" column="total" />               
+        <property name="storeAsStar" column="storeAsStar" />
+        <property name="storeAssess" column="storeAssess" />
+        <property name="memAsStar" column="memAsStar" />
+        <property name="memAssess" column="memAssess" />
+        <property name="status" column="status" />
+        <property name="isReport" column="isReport" />
+        <property name="comments" column="comments" />
+        <property name="reportDate" column="reportDate" />
+        <property name="refundAcc" column="refundAcc" />        
+        <property name="custAddress" column="custAddress" />
+        <many-to-one name="storeVO" class="za101g2.store.model.StoreVO" lazy="false">
+        	<column name="storeId"/>
+        </many-to-one>
+        <many-to-one name="memberVO" class="za101g2.member.model.MemberVO" lazy="false">
+        	<column name="memId"/>
+        </many-to-one>        
+        <set  name="orderLists" table="OrderList" lazy="false" cascade="all-delete-orphan" inverse="true" order-by="id asc">
+        	<key><column name="orderId"/></key>
+        	<one-to-many class="za101g2.orderList.model.OrderListVO"/>
+        </set>
+        <set  name="onServices" table="OnService" lazy="false" cascade="all-delete-orphan" inverse="true" order-by="id desc">
+        	<key><column name="orderId"/></key>
+        	<one-to-many class="za101g2.onService.model.OnServiceVO"/>
+        </set>    
+    </class>
+</hibernate-mapping>

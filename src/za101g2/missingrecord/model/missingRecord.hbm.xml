@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.missingrecord.model.MissingRecordVO" table="missingRecord" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">MissingRecord_seq</param>
+            </generator>  
+        </id>
+        
+        <property name="location" column="location" />
+        <property name="missingDate" column="missingDate" />
+        <property name="bounty" column="bounty" />
+        <property name="comments" column="comments" />
+        
+        <many-to-one name="petVO" class="za101g2.pet.model.PetVO" lazy="false">
+        	<column name="petId" />
+        </many-to-one>
+
+        <property name="status" column="status" />
+        <property name="bountyFor" column="bountyFor" />
+        <property name="missingPhoto" column="missingPhoto" />
+        <property name="latlng" column="latlng" />
+        
+        <set name="replies" table="missingReply" lazy="false" cascade="all"  inverse="true"  order-by="id asc">			
+			<key>
+				<column name="recordId" />
+			</key>
+			<one-to-many class="za101g2.missingreply.model.MissingReplyVO" />
+		</set>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="za101g2.photo.model.*"%>
+<%  int rowsPerPage = 12;  //每頁的筆數    
+    int rowNumber=0;      //總筆數
+    int pageNumber=0;     //總頁數      
+    int whichPage=1;      //第幾頁
+    int pageIndexArray[]=null;
+    int pageIndex=0;
+    
+%>
+
+<%
+	List<PhotoVO> list = (List<PhotoVO>)request.getAttribute("photoList");
+	pageContext.setAttribute("list",list);
+%>
+
+<%  
+    rowNumber=list.size();
+    if (rowNumber%rowsPerPage !=0)
+     pageNumber=rowNumber/rowsPerPage +1;
+    else pageNumber=rowNumber/rowsPerPage;    
+
+    pageIndexArray=new int[pageNumber]; 
+    for (int i=1 ; i<=pageIndexArray.length ; i++)
+    pageIndexArray[i-1]=i*rowsPerPage-rowsPerPage;
+%>
+
+<%  try {
+      whichPage = Integer.parseInt(request.getParameter("whichPage"));
+      pageIndex=pageIndexArray[whichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       whichPage=1;
+       pageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (pageNumber>0){
+              whichPage=pageNumber;
+              pageIndex=pageIndexArray[pageNumber-1];
+         }
+    } 
+%>
+
+<%
+	String action = (String)request.getAttribute("action");
+	String memId = (String)request.getAttribute("memId");
+	Integer petId = (Integer)request.getAttribute("petId");
+	String url = "";
+	if(action=="getPhotosByMemId"){url=request.getContextPath()+"/photo/photo.do?action=getPhotosByMemId&memId="+memId;}
+	else if(action=="getPhotosByPetId"){url=request.getContextPath()+"/photo/photo.do?action=getPhotosByPetId&memId="+memId+"&petId="+petId;}
+%>

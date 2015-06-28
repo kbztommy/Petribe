@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.onService.model.OnServiceVO" table="OnService" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">OnService_sq</param>
+            </generator>  
+        </id>
+                
+        <property name="comments" column="comments" />
+        <property name="releaseDate" column="releaseDate" />
+        <many-to-one name="orderBoardVO" class="za101g2.orderBoard.model.OrderBoardVO" lazy="false">
+        	<column name="orderId"></column>
+        </many-to-one>
+    
+        <set name="storePhotos" table="storePhoto" lazy="false" cascade="all-delete-orphan" inverse="true" order-by="id desc">
+        	<key><column name="onServiceId"/></key>
+        	<one-to-many class="za101g2.storePhoto.model.StorePhotoVO"/>
+        </set>
+    </class>
+</hibernate-mapping>

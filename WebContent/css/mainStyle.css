@@ -1,0 +1,189 @@
+body {
+    background-color: #ECEBEA;
+}
+
+body,input,button,select,textarea{
+font-family: "Helvetica Neue", Helvetica, Arial, "微軟正黑體", "微软雅黑", "メイリオ", "맑은 고딕", sans-serif;
+font-size:108%;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 120px;
+    }
+    .sidebar {
+        background-color: #ECEBEA;
+        max-width: 260px;
+    }
+    .navbar-brand {
+        height: 100px;
+        padding: 0px 15px;
+    }
+    .textbot {
+        position: relative;
+    }
+    .navguest {
+        bottom: 0px;
+        left: 30%;
+        position: absolute;
+    }
+    
+    .logincall {
+        bottom: 0px;
+        position: absolute;
+        right: 0px;
+    }
+    
+    .searchPanel{
+	 height:calc(21%);
+	 margin:5px;
+	 border:solid 1px #1CACFF;
+	 min-height:100px;
+	}
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-top: 0px;
+    }
+    
+     .searchPanel{	
+	 margin:5px;
+	 border:solid 1px #1CACFF;
+	}
+    
+}
+
+.panel-body img {
+    width: 100%;
+}
+
+#personal,
+#findboard,
+#finddog,
+#btlogin,
+#petribeHome {
+    font-size: 1.5em;
+    font-family: bold;
+    color: #fff;
+}
+
+#personal:hover,
+#findboard:hover,
+#finddog:hover,
+#btlogin:hover,
+#petribeHome {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.mynav {
+    background: #0085D0;
+}
+
+.mobileicon {
+    height: 35px;
+}
+
+.rest{
+	background-color:#C3C6C8;
+	font-weight:900;
+}
+
+.open{
+	background-color:#1CACFF;
+	font-weight:900;
+}
+
+.notAvailable{
+	background-color:rgba(255,0,0,0.5);
+	font-weight:900;
+}
+
+td[class]:hover{
+	 opacity: 0.8;
+}
+
+.maxQty{
+	font-size :1.5em;
+}
+
+
+
+#map{	
+    height:calc(100%);    
+    bottom:0;  
+}
+
+.img-autoW{
+	width:auto;
+	height:80%;	
+}
+
+.searchPanel:hover{
+	border-color:#F29327;
+}
+
+.storeInfoPanel{
+	background-color:#fff;
+	margin-bottom:15px;
+	padding:10px;
+	border:1px solid #F0D19A;
+	word-wrap: break-word;
+}
+
+
+.ImageStyle {
+    max-height:300px; 
+    max-width:300px;
+    width:expression( (this.width > 300 && this.width > this.height) ? '300px': this.width+'px');
+    height:expression( (this.height > 300 && this.height > this.width) ? '300px': this.height+'px');
+    border: 0px;
+    vertical-align: middle;
+}
+
+.mynav-pills{
+	margin-bottom:15px;
+	font-size:14pt;
+}
+
+.btSidebar{
+	font-size:14pt;
+}
+
+.myBreadCrumb{
+	 background-color: #ECEBEA;
+	 font-size:13pt;
+}
+
+.noResut{
+	font-size:14pt;
+}
+
+.console {
+	border: 1px solid #CCCCCC;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	height: 170px;
+	overflow-y: scroll;
+	padding: 5px;
+	width: 100%;
+}
+
+@media (min-width: 992px) {
+  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    float: left;
+    postion:relative;
+    z-index:1;
+  }
+}
+
+.msgBox{
+	width:300px;position: fixed; bottom: 0px; 
+	z-index:9999;
+}
+
+.wordForBoard{
+	word-wrap: break-word;
+}
+

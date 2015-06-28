@@ -1,0 +1,55 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+<%	
+	calendar.set(thisYear,thisMonth,1);
+	firstDateInMonth = calendar.get(Calendar.DAY_OF_WEEK);
+	if(monthCalendarList.size()!=0){		
+		countOfMonth = monthCalendarList.size()+firstDateInMonth-1;
+ %>
+   		
+		  <table class="table table-condensed table-bordered" id=<%= thisYear+"-"+thisMonth %>>		  		  
+			<thead>
+				<tr>
+					<th>星期日</th>
+					<th>星期一</th>
+					<th>星期二</th>
+					<th>星期三</th>
+					<th>星期四</th>
+					<th>星期五</th>
+					<th>星期六</th>				
+				</tr>
+			</thead>
+			 		
+			<tbody>		
+				<% for(int w = 0;w < (int)(Math.ceil(countOfMonth/7.0));w++){ %>
+					<tr >
+						<% for(int d = 0;d<7;d++){ %>
+							<td <%if(w*7+d>=firstDateInMonth-1 && w*7+d<countOfMonth){ %>id=<%}%>"<%=thisYear+"-"+thisMonth+"-"+(w*7+d-firstDateInMonth+2) %>">
+								<%if(w*7+d>=firstDateInMonth-1 && w*7+d<countOfMonth){ %>
+								<div class="btn btOrderOk monthCount<%=monthCount%>">
+									<div>
+										<b><%= w*7+d-firstDateInMonth+2%>日</b>
+									</div>
+									<div class="blockQty text-center">
+										<span ><%= monthCalendarList.get(w*7+d-firstDateInMonth+1).getCurQuantitly() %></span>		
+											/								
+		  								<span ><%= monthCalendarList.get(w*7+d-firstDateInMonth+1).getMaxQuantitly() %></span>
+		  																
+		  							</div>
+	  							</div>  															
+								<%}%>
+							</td>	
+						<%}%>
+					</tr>
+				<%}%>					
+			</tbody>			
+			<tfoot>
+				<tr><td></td><td></td><td></td><td></td><td></td><td class="rest">不可預定</td><td class="open">可預訂</td></tr>		
+			</tfoot>								
+		</table>
+<%}else{ %>
+	<div class="alert alert-danger" role="alert" >
+		<h3>尚無<%= ((HashMap<Integer,String>)application.getAttribute("storeCalendarMap")).get(thisMonth) %>商店日曆   </h3>
+	</div>	
+<%} %>	
+<% monthCount++;%>

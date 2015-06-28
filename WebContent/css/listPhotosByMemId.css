@@ -1,0 +1,54 @@
+.albumTitle {
+	font: bold 18px Tahoma, Arial, Verdana;
+}
+
+.petSearch {
+	text-align: right;
+}
+
+.petSearch:hover, .petSearch:active {
+	
+}
+
+.imgFrame {
+	border: 2px solid #fff;
+    border-radius: 10px;
+	width: 190px;
+	height: 190px;
+	overflow: hidden;
+	padding: 0px;
+}
+
+.img {
+
+}
+
+.imgName {
+	color: #01669F;
+	padding: 0px;
+}
+
+.changeName {
+	height: 16px;
+}
+
+.changeNameIn {
+	background-color: #fff;
+	padding: 0px;
+	font-size: 9px;
+	height: 14px;
+}
+
+.delBtn {
+	border-width: 0px;
+	color: #01669F;
+	background-color: #fff;
+}
+
+#myPopover {
+	padding: 0px;
+}
+
+#myPopover ul {
+	list-style-type: disc;
+}

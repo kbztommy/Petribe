@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.pet.model.PetVO" table="pet" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">pet_id_seq</param>
+            </generator>  
+        </id>
+        
+        <property name="icon" column="icon" />
+        <property name="name" column="name" />
+        <property name="species" column="species" />
+        <property name="qrCode" column="qrCode" />
+        <property name="status" column="status" insert="false"/>
+        <many-to-one name="memberVO" class="za101g2.member.model.MemberVO" lazy="false">
+        	<column name="memId" />
+        </many-to-one>
+        
+        <set name="records" table="missingRecord" lazy="false" cascade="all"  inverse="true"  order-by="id asc">			
+			<key>
+				<column name="petId" />
+			</key>
+			<one-to-many class="za101g2.missingrecord.model.MissingRecordVO" />
+		</set>
+        
+    </class>
+</hibernate-mapping>

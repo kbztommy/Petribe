@@ -1,0 +1,36 @@
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<header id="top_header">
+		<div class="col-md-1"></div>
+		<div class="col-md-1"><img src="<%=request.getContextPath()%>/images/Logo_orange.png" id="logo"></div>
+		<div class="col-md-8"></div>
+		<div class="col-md-1"  valign="Bottom"><button id="logout"><a  class="btn btn-link" role="button" href="<%=request.getContextPath()%>/za101g2/back/staff/staff.do?action=logout"><font color="white">登出</font></a></button></div>
+		
+	</header>
+	<div id="big_wrapper" class="container">
+		<nav id="main_menu" class="col-md-2">
+			<ul id="navUl" class="nav nav-stacked">
+			<div class="navTitle"><a data-toggle="collapse" data-parent="#navUl" href="#Link1">權限管理</a></div>
+				<ul id="Link1"  class="collapse">
+					<li><a href="<%=request.getContextPath()%>/za101g2/back/member/memberManager.jsp">會員管理</a></li><br>
+					<li><a href="<%=request.getContextPath()%>/za101g2/back/staff/staffManager.jsp">員工管理</a></li><br>
+				</ul>
+			<div class="navTitle"><a data-toggle="collapse" data-parent="#navUl" href="#Link2">寄養管理</a></div>
+				<ul id="Link2"  class="collapse">
+					<li><a href="<%=request.getContextPath()%>/orderBoardServlet?action=listOrderBoardMana">審核訂單檢舉</a></li><br>
+					<li><a href="<%=request.getContextPath()%>/za101g2/back/store/storeApply.jsp">商家審核</a></li><br>
+				</ul>
+			<div class="navTitle"><a data-toggle="collapse" data-parent="#navUl" href="#Link3">協尋管理</a></div>
+				<ul id="Link3"  class="collapse">
+					<li><a href="<%=request.getContextPath()%>/za101g2/back/missingRecord/manageRecordIndex.jsp">發放賞金</a></li><br>
+					<li><a href="<%=request.getContextPath()%>/za101g2/back/missingReport/manageReportIndex.jsp">檢舉回報管理</a></li><br>
+				</ul>
+			<div class="navTitle"><a data-toggle="collapse" data-parent="#navUl" href="#Link4">日誌管理</a></div>
+				<ul id="Link4"  class="collapse">
+					<li><a href="<%=request.getContextPath()%>/backJournalReport/backJournalReport.do?action=listJournalReports">文章管理</a></li><br>
+					<li><a href="<%=request.getContextPath()%>/backJournalBoardReport/backJournalBoardReport.do?action=listJournalBoardReports">留言管理</a></li><br>
+				</ul>
+			<div class="navTitle"><a href="<%=request.getContextPath()%>/za101g2/back/announcement/addAnnouncement.jsp">發佈公告</a></div>
+			<div class="navTitle"><a href="<%=request.getContextPath()%>/za101g2/back/password/index.jsp">修改密碼</a></div>
+			<div class="navTitle"><a href="<%=request.getContextPath()%>/za101g2/back/homePage/home.jsp">回首頁</a></div>		
+			</ul>
+		</nav>

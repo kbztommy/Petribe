@@ -1,0 +1,46 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+      <!-- ***************************Modal(自訂服務)******************************** -->
+    <div class="modal fade" id="addOnServiceModal" tabindex="-1" role="dialog" aria-labelledby="addOnServiceLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding:15px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addOnServiceLabel">新增代養回報</h4>
+                </div>
+                
+                <div class="modal-body">
+                	<div class="alert alert-danger" role="alert" id="errorMsg">
+						至少要上傳一張回報的照片
+					</div>
+					<br>	
+                	<form class="form-group" action="<%= request.getContextPath()%>/OnServiceServlet" id="onServiceForm"  enctype="multipart/form-data" method="post">
+	                	<div class="row">
+	                		<label class=" control-label">代養人回報</label>   
+	                		<textarea class="form-control" rows="3" name="comments" placeholder="描述您的回報"></textarea>
+	                	</div>
+	                	<div class="row" style="margin:15px;">
+		                	<div class="col-xs-offset-1">
+		                		<button type="button" class="btn btn-primary" id="addPic" data-toggle="tooltip" data-placement="top" title="上傳照片">
+		                		<span class="glyphicon glyphicon-picture"></span>
+		                		</button>
+		                	</div>  
+	                	</div>
+	                	<div class="row" id="inputPanel">
+	                		
+	                	</div>  
+	                	<div  class="row clearfix" id="picPanel">
+	                	
+	                	</div> 
+	                	<input type="hidden" name ="action" value="addOnservice">
+	                	<input type="hidden" name ="orderId" value="${orderBoardVO.id}">
+              		</form>	       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btaddOnService">儲存</button>            
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>              
+            </div>
+        </div>
+    </div>
+    <!-- ***********************end Modal(自訂服務)******************************** -->

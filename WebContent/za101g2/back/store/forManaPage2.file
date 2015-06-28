@@ -1,0 +1,36 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 text-center"> 
+		 <%if (pageNumber>0){%>
+		<p><b>第<%=whichPage%>/<%=pageNumber%>頁</b></p>
+		<%}%>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-8 pull-left text-center">
+	  <%if (rowsPerPage<rowNumber) {%>
+	   
+	       <a type="button" class="btn btn-link <%=pageIndex>=rowsPerPage?"":"disabled" %>" href="<%=request.getContextPath() %>/orderBoardServlet?action=listOrderBoardMana&whichPage=1&status=${status}">至第一頁</a>&nbsp;
+	       <a type="button" class="btn btn-link <%=pageIndex>=rowsPerPage?"":"disabled" %>"  href="<%=request.getContextPath() %>/orderBoardServlet?action=listOrderBoardMana&whichPage=<%=whichPage-1%>&status=${status}">上一頁 </a>&nbsp;
+	   
+	       <a type="button" class="btn btn-link <%=pageIndex<pageIndexArray[pageNumber-1]?"":"disabled" %>" href="<%=request.getContextPath() %>/orderBoardServlet?action=listOrderBoardMana&whichPage=<%=whichPage+1%>&status=${status}">下一頁 </a>&nbsp;
+	       <a type="button" class="btn btn-link <%=pageIndex<pageIndexArray[pageNumber-1]?"":"disabled" %>"  href="<%=request.getContextPath() %>/orderBoardServlet?action=listOrderBoardMana&whichPage=<%=pageNumber%>&status=${status}">至最後一頁</a>&nbsp;
+	    
+	  <%}%>  
+	</div>
+	<div class="col-xs-4 pull-right text-center">  
+	<%if ( pageNumber > 1) {%>
+	
+	   <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/orderBoardServlet?action=listOrderBoardMana">   
+	        
+	           <select size="1" name="whichPage">
+	        <%for (int i=1; i<=pageNumber; i++){%>
+	           <option value="<%=i%>">跳至第<%=i%>頁
+	        <%}%> 
+	           </select>
+	           <input type="hidden" name="status" value="${status}" />
+	           <button type="submit" class="btn btn-default">確定</button>
+	   </FORM>
+	<%}%>
+	</div>
+</div>

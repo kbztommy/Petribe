@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.storeBoard.model.StoreBoardVO" table="StoreBoard" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">StoreBoard_sq</param>
+            </generator>  
+        </id>                      
+        
+        <property name="boardMsg" column="boardMsg" />
+        <property name="boardMsgDate" column="boardMsgDate" />
+        <property name="isDelete" column="isDelete" />
+        <many-to-one name="storeVO" class="za101g2.store.model.StoreVO" lazy="false">
+        	<column name="storeId"/>
+        </many-to-one>
+        
+        <many-to-one name="memberVO" class="za101g2.member.model.MemberVO" lazy="false">
+        	<column name="memId"/>
+        </many-to-one>  
+        
+        <set name="storeBoardReports" table="StoreBoardReport" lazy="false" cascade="all" inverse="true" order-by="storeMsgId asc">
+        	<key><column name="storeMsgId"/></key>
+        	<one-to-many class="za101g2.storeBoardReport.model.StoreBoardReportVO"/>
+        </set>
+    </class>
+</hibernate-mapping>

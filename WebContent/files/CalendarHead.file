@@ -1,0 +1,93 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>    
+    
+    <!-- ***************************nav********************************** -->
+    <nav class="navbar navbar-default mynav navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="col-xs-3 visible-xs">
+                    <a class="navbar-brand" href="#">
+                        <img src="<%= request.getContextPath()%>/images/logo_icon_lite.png" class="mobileicon">
+                    </a>
+                </div>
+                <div class="col-md-2 hidden-xs ">
+                    <a class="navbar-brand" href="#"><img src="<%= request.getContextPath()%>/images/Logo_w.png"></a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse textbot" id="bs-example-navbar-collapse-1">
+                <div class="navbar-right">                   
+                    <ul class="nav navbar-nav navguest">
+                        <li><a href="#" id="finddog" class="btn">協尋 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#" id="findboard" class="btn">寄養</a></li>
+                        <li><a href="#" id="logout" class="btn visible-xs"><font color="white">登出</font></a></li>                        
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- *****************************end nav**************************** -->
+    <nav class="navbar navbar-default visible-xs visible-sm">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="col-xs-3 visible-xs">
+                    <a class="navbar-brand" href="#">
+                        <img src="<%= request.getContextPath()%>/images/pp11.jpg" class="mobileicon">
+                    </a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" id="myinfo" class="btn">個人資料<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#" id="myboard" class="btn">我的寄養 <span class="badge">4</span></a></li>
+                    <li><a href="#" id="myhost" class="btn">我的商家 <span class="badge">4</span></a></li>                 
+                    <li><a href="#" id="myfollow" class="btn">我的追隨 <span class="badge">4</span></a></li>
+                    <li><a href="#" id="mymain" class="btn">我的站內信 <span class="badge">4</span></a></li>
+                    <li><a href="#" id="logout" class="btn">登出</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- *****************************main******************************* -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- ***********會員資料************-->
+            <section>
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="sidebar col-md-2 hidden-print hidden-xs hidden-sm affix" data-spy="affix">
+                        <ul class="nav">
+                            <li>
+                                <div><img src="<%= request.getContextPath()%>/images/pp11.jpg" class="center-block"></div>
+                            </li>
+                            <li><a href="#" id="myinfo" class="btn">個人資料<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#" id="myboard" class="btn">我的寄養 <span class="badge">4</span></a></li>
+                            <li><a href="#" id="myhost" class="btn">我的商家 <span class="badge">4</span></a></li>                            
+                            <li><a href="#" id="myfollow" class="btn">我的追隨 <span class="badge">4</span></a></li>
+                            <li><a href="#" id="mymain" class="btn">我的站內信 <span class="badge">4</span></a></li>
+                            <li><a href="#" id="logout" class="btn">登出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- **********end 會員資料******** -->
+            <!-- **********內容**************** -->
+            <section>
+                <div class="col-md-8">

@@ -1,0 +1,79 @@
+.title{
+	margin:10px 5px 10px 5px;
+	text-align: center;
+	color: #F29327;
+	border: 2px dotted #F2B27F;
+	height: 50px;
+	font: bold 25px Tahoma, Arial, Verdana;
+	padding: 5px;
+	background-color: #FEFAF5;
+}
+.photoTitle{
+	text-align: center;
+	border: 1px solid #e6e6e6;
+	color: #1CACFF;
+	height: 35px;
+	font: bold 18px Tahoma, Arial, Verdana;
+	padding: 2px;
+}
+.photoList {
+	display: -webkit-flex; /* Safari */
+	-webkit-justify-content: space-around; /* Safari 6.1+ */
+	display: flex;
+	justify-content: space-around;
+	border: 1px solid #e6e6e6;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 230px;
+}
+.photo{
+	height:180px;
+}
+.journalPhoto{
+	height:280px;
+}
+.journalTitle {
+	font: bold 20px Tahoma, Arial, Verdana;
+	text-align: center;
+	padding: 5px;
+	height: 20px;
+}
+.journalFrameTitle{
+	margin:10px 5px 10px 5px;
+	text-align: center;
+	color: #1CACFF;
+	border: 2px dotted #e6e6e6;
+	height: 50px;
+	font: bold 25px Tahoma, Arial, Verdana;
+	padding: 5px;
+	background-color: #FEFAF5;
+}
+.article {
+	font: bold 18px Tahoma, Arial, Verdana;
+	margin: 15px;
+	height: 230px;
+	overflow: hidden;
+}
+.journalPhotoSD{
+	width:180px;
+}
+.journalFrame{
+	height:600px;
+	border: 2px solid #e6e6e6;
+}
+.petIcon{
+	border: 2px solid #fff;
+    border-radius: 10px;
+    height:250px;
+}
+.missingBtn{
+	font: bold 16px Tahoma, Arial, Verdana;
+}
+.missingBtn:hover,
+.missingBtn:active
+{
+	background-color: #F29327;
+	border: 1px solid #F29327;
+	font: bold 16px Tahoma, Arial, Verdana;
+
+}

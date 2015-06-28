@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="za101g2.serviceList.model.ServiceListVO" table="ServiceList" >
+        
+        <id name="id" column="id">
+            <generator class="sequence" >
+              <param name="sequence">ServiceList_sq</param>
+            </generator>  
+        </id>
+                
+        <property name="name" column="name" />
+        <property name="Info" column="Info" />
+        <property name="price" column="price" />        
+        <property name="isOnsale" column="isOnsale" />
+        <property name="petType" column="petType" />
+        <property name="chargeType" column="chargeType" />
+        <many-to-one name="storeVO" class="za101g2.store.model.StoreVO" lazy="false">
+        	<column name="storeId"/>
+        </many-to-one>      
+        <set name="orderLists" table="OrderList" lazy="false" cascade="delete-orphan" inverse="true" order-by="serviceDate">
+        	<key><column name="serviceId"></column></key>
+        	<one-to-many class="za101g2.orderList.model.OrderListVO"/>
+        </set>
+    </class>
+</hibernate-mapping>

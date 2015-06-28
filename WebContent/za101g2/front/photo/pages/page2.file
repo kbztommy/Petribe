@@ -1,0 +1,48 @@
+﻿<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<div class="col-md-12 row">
+	<div class="col-md-4"  style="text-align:left;padding:0px;">
+<table border="0">    
+	<tr>
+  	<%if (rowsPerPage<rowNumber) {%>
+    	<%if(pageIndex>=rowsPerPage){%>
+        	<td><A href="<%=url%>&whichPage=1">至第一頁</A>&nbsp;</td>        
+	        <td><A href="<%=url%>&whichPage=<%=whichPage-1%>">上一頁</A>&nbsp;</td>
+    	<%}%>  
+   		<%if(pageIndex<pageIndexArray[pageNumber-1]){%>
+    	    <td><A href="<%=url%>&whichPage=<%=whichPage+1%>">下一頁</A>&nbsp;</td>
+    	    <td><A href="<%=url%>&whichPage=<%=pageNumber%>">至最後一頁</A>&nbsp;</td>
+    	<%}%>
+  	<%}%>  
+	</tr>
+</table>
+	</div>
+	
+	<div class="col-md-5">
+<%if ( pageNumber > 1) {%> 
+<table border="0">
+	<tr>
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/photo/photo.do">
+		<td>
+		<select size="1" class="form-control" style="width:120px;" name="whichPage">
+        	<%for (int i=1; i<=pageNumber; i++){%>
+           		<option value="<%=i%>">第<%=i%>頁
+        	<%}%> 
+        </select>
+        </td>
+    <td><input class="btn btn-default" type="submit" value="確定" ></td>
+	<input type="hidden" name="action"  value="<%=action%>">
+	<input type="hidden" name="memId"  value="<%=memId%>">
+	<input type="hidden" name="petId"  value="<%=petId%>">
+	</FORM>
+	</tr>
+</table>
+<%}%>
+	</div>
+	
+	<div class="col-md-3" style="text-align:right;padding:0px;">
+		<b>圖片共<%=rowNumber%>張</b>
+		<%if (pageNumber>0){%>
+			<font color="#01669F"><b>第<%=whichPage%>/<%=pageNumber%>頁</b></font>
+		<%}%>
+	</div>
+</div>

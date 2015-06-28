@@ -1,0 +1,286 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>    
+<jsp:useBean id="memberSrv" class="za101g2.member.model.MemberService" scope="session"/>
+<jsp:useBean id="friendsSrv" class="za101g2.friends.model.FriendsService" scope="session" />
+<c:set var="friendsList" value="${friendsSrv.findOnesFriends(memberVO.id,'1')}" scope="page" />
+<!--  ********************************即時聊天********************************** -->
+<script type="application/javascript">
+
+        $(document).ready(function(){
+        
+        <c:if test="${not empty memberVO}">
+        	var NotifyChat = {};
+
+	        NotifyChat.socket = null;
+	
+	        NotifyChat.connect = (
+	        	function(host) {
+	            if ('WebSocket' in window) {
+	                NotifyChat.socket = new WebSocket(host);
+	            } else if ('MozWebSocket' in window) {
+	                NotifyChat.socket = new MozWebSocket(host);
+	            } else {
+	                Console.log1('Error: WebSocket is not supported by this browser.');
+	                return;
+	            }
+	
+	            NotifyChat.socket.onmessage = function (message) {
+	                Console.log1(message.data);
+	            };
+	        });
+	
+	        NotifyChat.initialize = function() {
+	            if (window.location.protocol == 'http:') {
+	                NotifyChat.connect('ws://' + window.location.host + '<%= request.getContextPath()%>/za101g2/front/message/notify/');
+	            } else {
+	            	  NotifyChat.connect('wss://' + window.location.host + '<%= request.getContextPath()%>/za101g2/front/message/notify/');
+	            }
+	        };
+	        
+	        var Console = {};
+	
+	        Console.log1 = (function(message) {
+	        	var friendMemId = message;
+	            var friendLabel = $('#friLabel-'+friendMemId);
+	            friendLabel.removeClass("hidden");
+	        });
+	
+	        NotifyChat.initialize();
+        
+        	</c:if>
+        
+        
+        
+        
+        
+        
+        	var curChatId =[];
+        	function myMsg(onesmemberid){
+        	
+	        	 var Chat = {};
+	        	 
+	             Chat.socket = null;
+	             
+	             Chat.connect = (function(host) {
+	            	 
+	                 if ('WebSocket' in window) {
+	                     Chat.socket = new WebSocket(host);
+	                 } else if ('MozWebSocket' in window) {
+	                     Chat.socket = new MozWebSocket(host);
+	                 } else {
+	                     Console.log('Error: WebSocket is not supported by this browser.');
+	                     return;
+	                 }
+	
+	                 Chat.socket.onopen = function () {
+	                     document.getElementById('chat'+onesmemberid).onkeydown = function(event) {
+	                         if (event.keyCode == 13) {
+	                             Chat.sendMessage();
+	                         }
+	                     };
+	                 };
+	
+	                 Chat.socket.onclose = function () {
+	                     //document.getElementById('chat'+onesmemberid).onkeydown = null;
+	                     //Console.log('closed');
+	                 };
+	
+	                 Chat.socket.onmessage = function (message) {
+	                     Console.log(message.data);
+	                 };
+	             });
+				
+	             Chat.close=(function(){
+	            	 Chat.socket.close();
+	             });
+	           
+	            
+	             Chat.sendMessage = (function() {
+	                 var message = document.getElementById('chat'+onesmemberid).value;
+	                 if (message != '') {
+	                     Chat.socket.send(message);
+	                     document.getElementById('chat'+onesmemberid).value = '';
+	                 }
+	             });
+	
+	             var Console = {};
+	
+	             Console.log = (function(message) {
+	                 var console = document.getElementById('console'+onesmemberid);
+	                 var p = document.createElement('p');
+	                 p.style.wordWrap = 'break-word';
+	                 p.innerHTML = message;
+	                 console.appendChild(p);
+	                 while (console.childNodes.length > 25) {
+	                     console.removeChild(console.firstChild);
+	                 }
+	                 console.scrollTop = console.scrollHeight;
+	             });            
+           		 return Chat; 
+        	}//end of myMsg
+        	
+             var curMsg=0;
+        	 $(".btFriend").click(function() {
+        		var onesmemberid = $(this).attr("id").split("-")[1]; 
+        		var Chat = myMsg(onesmemberid);
+        		$('#friLabel-'+onesmemberid).addClass("hidden");
+        		
+        		if($(this).attr("class").indexOf("chating")==-1){
+        			$(this).addClass('chating');
+	        		$("#fixedView").append(
+	        		'<div class="msgBox hidden-xs hidden-sm " style="right:'+curMsg*300+'px;" id="friMsg-'+onesmemberid+'">'+
+	 						'<div class="panel panel-default">'+
+							'<div class="panel-heading ">'+
+									'<h3 class="panel-title"><button class="btn btn-xs pull-right btRemMsg">'+
+									'<span class="glyphicon glyphicon-remove"} style="float:right"></span></button>'+$(this).text()+'</h3>'+
+							'</div>'+
+							'<div class="console-container" >'+
+								'<div id="console'+onesmemberid+'" style="height:200px;" class="console"/>'+
+							'</div>'+
+							'<p>'+
+								'<input type="text" placeholder="傳送訊息" id="chat'+onesmemberid+'" class="form-control"/>'+
+							'</p>'+
+						'</div>'+
+					'</div>');
+	        		 
+	        		 //if(!hasChated(onesmemberid)){
+		                 if (window.location.protocol == 'http:') {
+		                     Chat.connect('ws://' + window.location.host + '<%= request.getContextPath()%>/za101g2/front/message/chat/' + onesmemberid);
+		                 } else {
+		                 	  Chat.connect('wss://' + window.location.host + '<%= request.getContextPath()%>/za101g2/front/message/chat/' + onesmemberid);
+		                 }
+	        		 //}
+	                 
+	                 curMsg++;
+	                 
+	                 $(".btRemMsg").click(function(){
+	                	 
+	                	 var id= $(this).parent().parent().parent().parent().attr("id").split("-")[1];
+	            		 $(this).parent().parent().parent().parent().remove();
+	            		 $("#id-"+id).removeClass("chating");
+	            		 if(curMsg>0){
+	            		 	curMsg--;
+	            		 }
+	            		 Chat.close();
+	            	 });
+        		 }//end of if
+        	 });//end of btFriend click
+        	 
+        	 function hasChated(id){
+        		 for(var i=0;i<curChatId.length;i++){
+        			 if(curChatId[i] == id)
+        			 	return true;
+        		 }
+        		 curChatId.push(id);
+        		 return false;
+        	 }
+        	 
+        });//end of ready
+		
+      
+</script>
+<!--  ********************************即時聊天********************************** -->	
+    <!-- ***************************nav********************************** -->
+    <nav class="navbar navbar-default mynav navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="col-xs-3 visible-xs">
+                    <a class="navbar-brand" href="<%=request.getContextPath() %>/za101g2/front/index.jsp" id="petribeHome">
+                        <img src="<%= request.getContextPath()%>/images/logo_icon_lite.png" class="mobileicon">
+                    </a>
+                </div>
+                <div class="col-md-2 hidden-xs ">
+                    <a class="navbar-brand" href="<%=request.getContextPath() %>/za101g2/front/index.jsp" id="petribeHome">
+                 	   <img src="<%= request.getContextPath()%>/images/Logo_w.png">
+                    </a>
+                </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse textbot" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav  navguest">
+                        <li><a href="<%=request.getContextPath() %>/za101g2/front/index.jsp" id="petribeHome">首頁 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="<%=request.getContextPath() %>/za101g2/front/missingRecord/listAllMissingRecord.jsp" id="finddog" >協尋 </a></li>
+                        <li><a href="<%=request.getContextPath() %>/za101g2/front/store/SearchStore.jsp" id="findboard" >寄養</a></li>
+                       
+                    </ul>
+                	
+	                <form class="navbar-form logincall">
+	                	<c:if test="${empty memberVO}">
+					        <a  class="btn btn-link btn-lg" role="button" href="<%=request.getContextPath()%>/za101g2/front/member/login.jsp?requestURL=/za101g2/front/index.jsp"><font color="white">登入</font></a>
+					        <a  class="btn btn-link btn-lg" role="button" href="<%=request.getContextPath()%>/za101g2/front/member/register.jsp"><font color="white">註冊</font></a>
+				        </c:if>
+				        <c:if test="${not empty memberVO }">
+				        	<p class="navbar-text" style="color:#fff"><a href="<%=request.getContextPath()%>/za101g2/front/member/memberManager.jsp" style="color:#fff;font-size:16px;">${memberVO.nickname}</a> 您好!!</p>
+				        	<a  class="btn btn-link btn-lg" role="button" href="<%=request.getContextPath()%>/za101g2/front/member/member.do?action=logout"><font color="white">登出</font></a>
+				        </c:if>
+				    </form>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- *****************************end nav**************************** -->
+   
+    <!-- *****************************main******************************* -->
+    <div class="container-fluid">
+    <c:if test="${not empty memberVO}">
+    	  <div class="row" id="fixedView">  
+            <!-- ***********會員資料************-->
+                <div class="col-md-12  affix hidden-xs hidden-sm clearfix" data-spy="affix">
+                    <div class="sidebar col-md-2 col-md-offset-1">
+                        <ul class="nav text-center">
+                            <li>
+                                <div style="width:125px" class="center-block"><img src="<%= request.getContextPath()%>/PicForMember?id=${memberVO.id}" class="center-block img-responsive"></div>
+                            </li>
+                            <li><h4>${memberVO.nickname}</h4></li>
+                            <li><a href="<%=request.getContextPath()%>/za101g2/front/member/memberManager.jsp" class="btSidebar" >個人資料<span class="sr-only">(current)</span></a></li>
+                            <li><a href="<%=request.getContextPath()%>/memberHome/memberHome.do?action=myHome" class="btSidebar" >我的日誌 <span class="badge"></span></a></li>
+                            <li><a href="<%=request.getContextPath() %>/za101g2/front/orderBoard/CustOrderList.jsp" class="btSidebar" >我的寄養<span class="badge"></span></a></li>                            
+                            <li><a href="<%= request.getContextPath() %>/za101g2/front/missingRecord/missingRecord.do?memId=${memberVO.id}&action=getMember_MissingRecord" class="btSidebar" >我的協尋 <span class="badge"></span></a></li>
+                            <li>
+                            <a href="<%=request.getContextPath() %>/za101g2/front/store/StoreHome.jsp" class="btSidebar" >
+                            	<%=session.getAttribute("storeVO")==null?"商家申請":"我的商家"%>
+                            	 <span class="badge"></span>
+                            </a>
+                            </li>
+                            <li><a href="<%=request.getContextPath() %>/za101g2/front/friend/friendApp.jsp" class="btSidebar" >朋友管理 <span class="badge"></span></a></li>                         
+                        </ul>
+                    </div>
+                    <div class="sidebar col-md-2  list-group text-center  pull-right" >
+                    	<a href="#" class="list-group-item active">我的好友 </a>
+                    	<c:forEach var="friend" items="${friendsList }">
+					 		 <a  class="list-group-item btn btFriend" id="id-${friend.friendMemId}">${memberSrv.getOneMember(friend.friendMemId).nickname } <span class="label label-danger hidden" id="friLabel-${friend.friendMemId}">new</span></a>
+					 	</c:forEach> 	 
+                    </div>
+                </div>
+           </div>	
+           <div class="row">
+                <div class="col-md-8 col-md-offset-1 hidden-md hidden-lg">
+                        <ul class="nav nav-pills nav-justified text-center">
+                        	
+                            <li><a href="<%=request.getContextPath()%>/za101g2/front/member/memberManager.jsp" class="btSidebarSm"  >個人資料<span class="sr-only">(current)</span></a></li>
+                            <li><a href="<%=request.getContextPath()%>/memberHome/memberHome.do?action=myHome" class="btSidebarSm"  >我的日誌 <span class="badge"></span></a></li>
+                            <li><a href="<%=request.getContextPath() %>/za101g2/front/orderBoard/CustOrderList.jsp" class="btSidebarSm" >我的寄養<span class="badge"></span></a></li>                            
+                            <li><a href="<%= request.getContextPath() %>/za101g2/front/missingRecord/missingRecord.do?memId=${memberVO.id}&action=getMember_MissingRecord" class="btSidebarSm">我的協尋<span class="badge"></span></a></li>
+                            <li>
+                            <a href="<%=request.getContextPath() %>/za101g2/front/store/StoreHome.jsp" class="btSidebarSm" >
+                            	<%=session.getAttribute("storeVO")==null?"商家申請":"我的商家"%>
+                            	 <span class="badge"></span>
+                            </a>
+                            </li>
+                            <li><a href="<%=request.getContextPath() %>/za101g2/front/friend/friendApp.jsp" class="btSidebarSm" >朋友管理 <span class="badge"></span></a></li>
+                             <li><h4><a href="<%=request.getContextPath()%>/za101g2/front/member/memberManager.jsp" style="color:#F29327;" class="btSidebar">${memberVO.nickname}</a> 您好!!</h4></li>
+                        </ul>
+                </div>
+          </div>
+    </c:if>
+          <div class="row">
+          	<div class="col-md-offset-3">
+            <!-- **********end 會員資料******** -->
+            <!-- **********內容**************** -->

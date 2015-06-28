@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory>
+
+ 		<!-- JNDI連線池 (Apache Tomcat 連線池DBCP)設定 -->
+		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/TestDB</property>
+        
+		<!--SQL方言,以下使用Oracle -->
+		<property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+
+		<!--是否要顯示實際操作資料庫時的SQL -->
+		<property name="hibernate.show_sql">false</property>
+
+        <!-- Disable the second-level cache -->
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+		<!--交易管理類型, 以下使用JDBC Transaction -->
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        
+        <!-- Enable Hibernate's automatic session context management -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!--Java物件與資料庫表格的映射檔 -->
+		<mapping resource="za101g2/member/model/Member.hbm.xml" />	
+		<mapping resource="za101g2/onService/model/OnService.hbm.xml" />
+		<mapping resource="za101g2/orderBoard/model/OrderBoard.hbm.xml" />
+		<mapping resource="za101g2/orderList/model/OrderList.hbm.xml" />
+		<mapping resource="za101g2/serviceList/model/ServiceList.hbm.xml" />
+		<mapping resource="za101g2/store/model/Store.hbm.xml" />
+		<mapping resource="za101g2/storeBoard/model/StoreBoard.hbm.xml" />
+		<mapping resource="za101g2/storeBoardReport/model/StoreBoardReport.hbm.xml" />
+		<mapping resource="za101g2/storeCalendar/model/StoreCalendar.hbm.xml" />
+		<mapping resource="za101g2/storePhoto/model/StorePhoto.hbm.xml" />
+		<mapping resource="za101g2/missingrecord/model/missingRecord.hbm.xml" />
+		<mapping resource="za101g2/missingreport/model/missingReport.hbm.xml" />
+		<mapping resource="za101g2/missingreply/model/missingReply.hbm.xml" />
+		<mapping resource="za101g2/pet/model/pet.hbm.xml" />
+		<mapping resource="za101g2/emailvalidate/model/emailValidate.hbm.xml" />
+		<mapping resource="za101g2/phonevalidate/model/phoneValidate.hbm.xml" />
+	</session-factory>
+	
+</hibernate-configuration>
